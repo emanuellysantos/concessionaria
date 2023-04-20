@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Cy8uAFZO38nu/bfGdxRcLp71eDasnHTlox7l8c507t+NApZ8rOekDcBAI5HHu7XOwBBZ76HWPxxjOC2bsxPa+g==",
+  "dgSpecHash": "sX2iRl6yJHxVH5Qq3XU6CahTndGAHINF/di5VMOA1lt8DxV21qLuWzrElHH+xf+znvPTXq9SMSvlP5/SK36dQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\emanu\\source\\repos\\Concessionaria\\Concessionaria\\Concessionaria.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\emanu\\.nuget\\packages\\bootstrap\\5.2.3\\bootstrap.5.2.3.nupkg.sha512",
     "C:\\Users\\emanu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\emanu\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\emanu\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

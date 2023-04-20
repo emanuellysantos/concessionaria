@@ -12,30 +12,30 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Concessionaria</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Concessionária ES</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Veiculos")">Veículos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Veiculos" asp-action="Index">Veículos</a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Venda")">Venda</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vendas" asp-action="Index">Vendas</a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Cliente")">Cliente</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Vendedor")">Vendedor</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vendedores" asp-action="Index">Vendedores</a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Endereco")">Endereco</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Enderecos" asp-action="Index">Endereço</a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Administrador")">Administrador</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Administradors" asp-action="Index">Administradores</a>
                         </li>
                     </ul>
                 </div>
@@ -50,12 +50,15 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Concessionaria
+            &copy; 2023 - Concessionaria - ESII
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
