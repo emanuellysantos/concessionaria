@@ -20,4 +20,6 @@ public partial class Endereco
     public string Estado { get; set; } = null!;
 
     public string Cep { get; set; } = null!;
+
+    public virtual ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
 }

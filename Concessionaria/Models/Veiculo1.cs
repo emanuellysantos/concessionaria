@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Concessionaria.Models;
 
-public partial class Veiculo
+public partial class Veiculo1
 {
-    public int Id { get; set; }
+    public string Id { get; set; } = null!;
 
-    public int Ano { get; set; }
+    public decimal Ano { get; set; }
 
     public string Modelo { get; set; } = null!;
 
@@ -16,6 +16,4 @@ public partial class Veiculo
     public string Chassi { get; set; } = null!;
 
     public decimal Valor { get; set; }
-
-    public virtual ICollection<Venda> Venda { get; set; } = new List<Venda>();
 }

@@ -1,10 +1,10 @@
 ﻿@model Concessionaria.Models.Venda
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar";
 }
 
-<h1>Create</h1>
+<h1>Adicionar</h1>
 
 <h4>Venda</h4>
 <hr />
@@ -25,14 +25,14 @@
                 <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para lista</a>
 </div>
 
 @section Scripts {

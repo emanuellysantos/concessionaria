@@ -21,9 +21,9 @@ public partial class ConcessionariaDbContext : DbContext
 
     public virtual DbSet<Endereco> Enderecos { get; set; }
 
-    public virtual DbSet<Veiculos> Veiculos { get; set; }
+    public virtual DbSet<Veiculo> Veiculo { get; set; }
 
-   // public virtual DbSet<Veiculo> Veiculo { get; set; }
+    public virtual DbSet<Veiculo1> Veiculos1 { get; set; }
 
     public virtual DbSet<Vendedor> Vendedors { get; set; }
 
@@ -67,12 +67,18 @@ public partial class ConcessionariaDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
+            entity.Property(e => e.EnderecoId).HasColumnName("endereco_id");
             entity.Property(e => e.Nome)
                 .HasMaxLength(255)
                 .HasColumnName("nome");
             entity.Property(e => e.Telefone)
                 .HasMaxLength(20)
                 .HasColumnName("telefone");
+
+            entity.HasOne(d => d.Endereco).WithMany(p => p.Clientes)
+                .HasForeignKey(d => d.EnderecoId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("cliente_endereco_id_fkey");
         });
 
         modelBuilder.Entity<Endereco>(entity =>
@@ -104,29 +110,29 @@ public partial class ConcessionariaDbContext : DbContext
             entity.Property(e => e.Numero).HasColumnName("numero");
         });
 
-        //modelBuilder.Entity<Veiculo>(entity =>
-        //{
-        //    entity.HasKey(e => e.Id).HasName("veiculo_pkey1");
+        modelBuilder.Entity<Veiculo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("veiculo_pkey1");
 
-        //    entity.ToTable("veiculo");
+            entity.ToTable("veiculo");
 
-        //    entity.Property(e => e.Id).HasColumnName("id");
-        //    entity.Property(e => e.Ano).HasColumnName("ano");
-        //    entity.Property(e => e.Chassi)
-        //        .HasMaxLength(50)
-        //        .HasColumnName("chassi");
-        //    entity.Property(e => e.Cor)
-        //        .HasMaxLength(50)
-        //        .HasColumnName("cor");
-        //    entity.Property(e => e.Modelo)
-        //        .HasMaxLength(255)
-        //        .HasColumnName("modelo");
-        //    entity.Property(e => e.Valor)
-        //        .HasPrecision(10, 2)
-        //        .HasColumnName("valor");
-        //});
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Ano).HasColumnName("ano");
+            entity.Property(e => e.Chassi)
+                .HasMaxLength(50)
+                .HasColumnName("chassi");
+            entity.Property(e => e.Cor)
+                .HasMaxLength(50)
+                .HasColumnName("cor");
+            entity.Property(e => e.Modelo)
+                .HasMaxLength(255)
+                .HasColumnName("modelo");
+            entity.Property(e => e.Valor)
+                .HasPrecision(10, 2)
+                .HasColumnName("valor");
+        });
 
-        modelBuilder.Entity<Veiculos>(entity =>
+        modelBuilder.Entity<Veiculo1>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("veiculo_pkey");
 
@@ -184,7 +190,7 @@ public partial class ConcessionariaDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("venda_cliente_id_fkey");
 
-            entity.HasOne(d => d.Veiculos).WithMany(p => p.Venda)
+            entity.HasOne(d => d.Veiculo).WithMany(p => p.Venda)
                 .HasForeignKey(d => d.VeiculoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("venda_veiculo_id_fkey");

@@ -13,9 +13,13 @@ public partial class Cliente
 
     public string Email { get; set; } = null!;
 
-    public DateOnly? DataNasc { get; set; }
+    public DateTime DataNasc { get; set; }
 
     public string Cpf { get; set; } = null!;
+
+    public int EnderecoId { get; set; }
+
+    public virtual Endereco Endereco { get; set; }
 
     public virtual ICollection<Venda> Venda { get; set; } = new List<Venda>();
 }

@@ -28,7 +28,7 @@ namespace Concessionaria.Controllers
         {
             return _context.Vendedors != null ?
                         View(await _context.Venda.ToListAsync()) :
-                        Problem("Entity set 'ConcessionariaDbContext.Vendedas'  is null.");
+                        Problem("Entity set 'ConcessionariaDbContext.Vendas'  is null.");
         }
 
         // GET: Vendas/Details/5
@@ -41,7 +41,7 @@ namespace Concessionaria.Controllers
 
             var venda = await _context.Venda
                 .Include(v => v.Cliente)
-                .Include(v => v.Veiculos)
+                .Include(v => v.Veiculo)
                 .Include(v => v.Vendedor)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (venda == null)
@@ -56,7 +56,7 @@ namespace Concessionaria.Controllers
         public IActionResult Create()
         {
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Id");
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id");
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Id");
             ViewData["VendedorId"] = new SelectList(_context.Vendedors, "Id", "Id");
             return View();
         }
@@ -75,7 +75,7 @@ namespace Concessionaria.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Id", venda.ClienteId);
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id", venda.VeiculoId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Id", venda.VeiculoId);
             ViewData["VendedorId"] = new SelectList(_context.Vendedors, "Id", "Id", venda.VendedorId);
             return View(venda);
         }
@@ -94,7 +94,7 @@ namespace Concessionaria.Controllers
                 return NotFound();
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Id", venda.ClienteId);
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id", venda.VeiculoId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Id", venda.VeiculoId);
             ViewData["VendedorId"] = new SelectList(_context.Vendedors, "Id", "Id", venda.VendedorId);
             return View(venda);
         }
@@ -132,7 +132,7 @@ namespace Concessionaria.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Id", venda.ClienteId);
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Id", venda.VeiculoId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Id", venda.VeiculoId);
             ViewData["VendedorId"] = new SelectList(_context.Vendedors, "Id", "Id", venda.VendedorId);
             return View(venda);
         }
@@ -147,7 +147,7 @@ namespace Concessionaria.Controllers
 
             var venda = await _context.Venda
                 .Include(v => v.Cliente)
-                .Include(v => v.Veiculos)
+                .Include(v => v.Veiculo)
                 .Include(v => v.Vendedor)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (venda == null)

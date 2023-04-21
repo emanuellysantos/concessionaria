@@ -1,10 +1,10 @@
-﻿@model Concessionaria.Models.Veiculos
+﻿@model Concessionaria.Models.Veiculo
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar Veículo";
 }
 
-<h1>Create</h1>
+<h1>Adicionar</h1>
 
 <h4>Veiculo</h4>
 <hr />
@@ -12,11 +12,6 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Ano" class="control-label"></label>
                 <input asp-for="Ano" class="form-control" />
@@ -43,14 +38,14 @@
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para lista</a>
 </div>
 
 @section Scripts {

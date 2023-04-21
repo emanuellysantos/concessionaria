@@ -21,21 +21,20 @@ namespace Concessionaria.Controllers
         // GET: Veiculos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Veiculos.ToListAsync());
-            //return _context.Veiculos != null ? 
-            //            View(await _context.Veiculos.ToListAsync()) :
-            //            Problem("Entity set 'ConcessionariaDbContext.Veiculo'  is null.");
+              return _context.Veiculo != null ? 
+                          View(await _context.Veiculo.ToListAsync()) :
+                          Problem("Entity set 'ConcessionariaDbContext.Veiculo'  is null.");
         }
 
         // GET: Veiculos/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Veiculos == null)
+            if (id == null || _context.Veiculo == null)
             {
                 return NotFound();
             }
 
-            var veiculo = await _context.Veiculos
+            var veiculo = await _context.Veiculo
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (veiculo == null)
             {
@@ -68,14 +67,14 @@ namespace Concessionaria.Controllers
         }
 
         // GET: Veiculos/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Veiculos == null)
+            if (id == null || _context.Veiculo == null)
             {
                 return NotFound();
             }
 
-            var veiculo = await _context.Veiculos.FindAsync(id);
+            var veiculo = await _context.Veiculo.FindAsync(id);
             if (veiculo == null)
             {
                 return NotFound();
@@ -88,7 +87,7 @@ namespace Concessionaria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ano,Modelo,Cor,Chassi,Valor")] Veiculos veiculo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ano,Modelo,Cor,Chassi,Valor")] Veiculo veiculo)
         {
             if (id != veiculo.Id)
             {
@@ -119,14 +118,14 @@ namespace Concessionaria.Controllers
         }
 
         // GET: Veiculos/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Veiculos == null)
+            if (id == null || _context.Veiculo == null)
             {
                 return NotFound();
             }
 
-            var veiculo = await _context.Veiculos
+            var veiculo = await _context.Veiculo
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (veiculo == null)
             {
@@ -141,14 +140,14 @@ namespace Concessionaria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Veiculos == null)
+            if (_context.Veiculo == null)
             {
                 return Problem("Entity set 'ConcessionariaDbContext.Veiculo'  is null.");
             }
-            var veiculo = await _context.Veiculos.FindAsync(id);
+            var veiculo = await _context.Veiculo.FindAsync(id);
             if (veiculo != null)
             {
-                _context.Veiculos.Remove(veiculo);
+                _context.Veiculo.Remove(veiculo);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +156,7 @@ namespace Concessionaria.Controllers
 
         private bool VeiculoExists(int id)
         {
-          return (_context.Veiculos?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Veiculo?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
