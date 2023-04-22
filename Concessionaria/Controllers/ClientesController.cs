@@ -42,7 +42,7 @@ namespace Concessionaria.Controllers
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(Tuple.Create(cliente, cliente.Endereco));
         }
 
         // GET: Clientes/Create
@@ -69,83 +69,9 @@ namespace Concessionaria.Controllers
             _context.Add(Item1);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            //}
-            //Item1.EnderecoId = Item2.Id;
-            //_context.Add(Item1);
-            //await _context.SaveChangesAsync();
-            //ViewData["EnderecoId"] = new SelectList(_context.Enderecos, "Id", "Id", Item1.EnderecoId);
+            
             return View(Tuple.Create(Item1, Item2));
         }
-
-        // POST: Clientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Nome,Telefone,Email,DataNasc,Cpf,EnderecoId")] Cliente cliente,
-        //    [Bind("Id,Logradouro,Numero,Bairro,Complemento,Cidade,Estado,Cep")] Endereco endereco)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(endereco);
-        //        cliente.EnderecoId = endereco.Id;
-        //        _context.Add(cliente);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["EnderecoId"] = new SelectList(_context.Enderecos, "Id", "Id", cliente.EnderecoId);
-        //    return View(Tuple.Create(cliente, endereco));
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(string Nome, string Telefone, string Email, DateTime DataNasc, string Cpf, int EnderecoId,
-        //    string Logradouro, int Numero, string Bairro, string? Complemento, string Cidade, string Estado, string Cep)
-        //{
-        //    Cliente cliente = new Cliente();
-
-        //    cliente.Nome = Nome;
-        //    cliente.Telefone = Telefone;
-        //    cliente.Email = Email;
-        //    DateOnly DataNas = DateOnly.FromDateTime(DataNasc);
-        //    cliente.DataNasc = DataNas;
-        //    cliente.Cpf = Cpf;
-
-        //    Endereco endereco = new Endereco();
-
-        //    endereco.Logradouro = Logradouro;
-        //    endereco.Numero = Numero;
-        //    endereco.Bairro = Bairro;
-        //    endereco.Complemento = Complemento;
-        //    endereco.Cidade = Cidade;
-        //    endereco.Estado = Estado;
-        //    endereco.Cep = Cep;
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(endereco);
-        //        cliente.EnderecoId = endereco.Id;
-        //        _context.Add(cliente);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["EnderecoId"] = new SelectList(_context.Enderecos, "Id", "Id", cliente.EnderecoId);
-        //    return View(Tuple.Create(cliente, endereco));
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<int> CreateE([Bind("Id,Logradouro,Numero,Bairro,Complemento,Cidade,Estado,Cep")] Endereco endereco)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(endereco);
-        //        await _context.SaveChangesAsync();
-        //        //return RedirectToAction(nameof(Index));
-        //    }
-        //    //return View(endereco);
-        //    return endereco.Id;
-        //}
 
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -156,12 +82,13 @@ namespace Concessionaria.Controllers
             }
 
             var cliente = await _context.Clientes.FindAsync(id);
+            var endereco = await _context.Enderecos.FindAsync(cliente.EnderecoId);
             if (cliente == null)
             {
                 return NotFound();
             }
             ViewData["EnderecoId"] = new SelectList(_context.Enderecos, "Id", "Id", cliente.EnderecoId);
-            return View(cliente);
+            return View(Tuple.Create(cliente, endereco));
         }
 
         // POST: Clientes/Edit/5
@@ -169,23 +96,24 @@ namespace Concessionaria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Telefone,Email,DataNasc,Cpf,EnderecoId")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, Cliente Item1, Endereco Item2)
         {
-            if (id != cliente.Id)
+            if (id != Item1.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
-                    _context.Update(cliente);
+                    _context.Update(Item1);
+                    _context.Update(Item2);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
+                    if (!ClienteExists(Item1.Id))
                     {
                         return NotFound();
                     }
@@ -195,13 +123,13 @@ namespace Concessionaria.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["EnderecoId"] = new SelectList(_context.Enderecos, "Id", "Id", cliente.EnderecoId);
-            return View(cliente);
+            //}
+            ViewData["EnderecoId"] = new SelectList(_context.Enderecos, "Id", "Id", Item1.EnderecoId);
+            //return View(Tuple.Create(Item1, Item2));
         }
 
         // GET: Clientes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, Cliente Item1, Endereco Item2)
         {
             if (id == null || _context.Clientes == null)
             {
@@ -215,20 +143,22 @@ namespace Concessionaria.Controllers
             {
                 return NotFound();
             }
+            var endereco = await _context.Enderecos.FindAsync(cliente.EnderecoId);
 
-            return View(cliente);
+            return View(Tuple.Create(cliente, endereco));
         }
 
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, Cliente Item1, Endereco Item2)
         {
             if (_context.Clientes == null)
             {
                 return Problem("Entity set 'ConcessionariaDbContext.Clientes'  is null.");
             }
             var cliente = await _context.Clientes.FindAsync(id);
+            var endereco = await _context.Enderecos.FindAsync(cliente.EnderecoId);
             if (cliente != null)
             {
                 _context.Clientes.Remove(cliente);

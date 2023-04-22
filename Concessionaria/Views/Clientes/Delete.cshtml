@@ -1,4 +1,4 @@
-﻿@model Concessionaria.Models.Cliente
+﻿@model Tuple<Concessionaria.Models.Cliente,Concessionaria.Models.Endereco>
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,45 +12,87 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Item1.Nome)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.Item1.Nome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
+            @Html.DisplayNameFor(model => model.Item1.Telefone)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
+            @Html.DisplayFor(model => model.Item1.Telefone)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Item1.Email)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Item1.Email)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataNasc)
+            @Html.DisplayNameFor(model => model.Item1.DataNasc)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataNasc)
+            @Html.DisplayFor(model => model.Item1.DataNasc)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpf)
+            @Html.DisplayNameFor(model => model.Item1.Cpf)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
+            @Html.DisplayFor(model => model.Item1.Cpf)
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Endereco)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Endereco.Id)
+        </dd>*@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Logradouro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Logradouro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Numero)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Numero)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Bairro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Bairro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Complemento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Complemento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Cidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Cidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Estado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item2.Cep)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item2.Cep)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Item1.Id" />
         <input type="submit" value="Deletar" class="btn btn-danger" /> |
         <a asp-action="Index">Voltar para lista</a>
     </form>
