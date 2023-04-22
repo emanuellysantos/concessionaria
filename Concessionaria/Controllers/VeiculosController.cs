@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Concessionaria.Models;
+using System.Text.RegularExpressions;
 
 namespace Concessionaria.Controllers
 {
@@ -75,6 +76,9 @@ namespace Concessionaria.Controllers
             }
 
             var veiculo = await _context.Veiculo.FindAsync(id);
+
+            veiculo.Valor = (int)veiculo.Valor;
+
             if (veiculo == null)
             {
                 return NotFound();
@@ -93,6 +97,8 @@ namespace Concessionaria.Controllers
             {
                 return NotFound();
             }
+
+            veiculo.Valor = (int)veiculo.Valor;
 
             if (ModelState.IsValid)
             {
