@@ -178,6 +178,85 @@ namespace Concessionaria.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Relatorios()
+        {
+            ViewData["RelatorioVeiculo"] = new SelectList(_context.Venda, "Id", "VeiculoId");
+
+            var lista = _context.Venda.Include(v => v.Veiculo);
+
+            Dictionary<int, int> frequencies = new Dictionary<int, int>();
+
+            foreach (var item in lista)
+            {
+                if (frequencies.ContainsKey(item.VeiculoId))
+                {
+                    frequencies[item.VeiculoId]++;
+                }
+                else
+                {
+                    frequencies[item.VeiculoId] = 1;
+                }
+            }
+
+            int maxFrequency = 0;
+            int mostFrequentItem = new int();
+
+            foreach (KeyValuePair<int, int> pair in frequencies)
+            {
+                if (pair.Value > maxFrequency)
+                {
+                    maxFrequency = pair.Value;
+                    mostFrequentItem = pair.Key;
+                }
+            }
+
+            ViewData["MostFrequentItem"] = mostFrequentItem;
+
+            //var venda = await _context.Venda.FindAsync(mostFrequentItem);
+            var veiculo = await _context.Veiculo.FindAsync(mostFrequentItem);
+
+            return View(veiculo);
+        }
+
+        public async Task<IActionResult> RelatorioVendedor()
+        {
+            ViewData["RelatorioVendedor"] = new SelectList(_context.Venda, "Id", "VendedorId");
+
+            var lista = _context.Venda.Include(v => v.Vendedor);
+
+            Dictionary<int, int> frequencies = new Dictionary<int, int>();
+
+            foreach (var item in lista)
+            {
+                if (frequencies.ContainsKey(item.VendedorId))
+                {
+                    frequencies[item.VendedorId]++;
+                }
+                else
+                {
+                    frequencies[item.VendedorId] = 1;
+                }
+            }
+
+            int maxFrequency = 0;
+            int mostFrequentItem = new int();
+
+            foreach (KeyValuePair<int, int> pair in frequencies)
+            {
+                if (pair.Value > maxFrequency)
+                {
+                    maxFrequency = pair.Value;
+                    mostFrequentItem = pair.Key;
+                }
+            }
+
+            ViewData["MostFrequentItem"] = mostFrequentItem;
+
+            var vendedor = await _context.Vendedors.FindAsync(mostFrequentItem);
+
+            return View(vendedor);
+        }
+
         private bool VendaExists(int id)
         {
           return (_context.Venda?.Any(e => e.Id == id)).GetValueOrDefault();

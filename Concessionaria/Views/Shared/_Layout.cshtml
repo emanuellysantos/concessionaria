@@ -101,7 +101,13 @@
 @*                              <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Início</a></li>
 *@                              <li><a asp-area="" asp-controller="Home" asp-action="Index">Início</a></li>
                                 <li><a asp-area="" asp-controller="Veiculos" asp-action="Index">Veículos</a></li>
-                                <li><a asp-area="" asp-controller="Vendas" asp-action="Index">Vendas</a></li>
+                                <li>
+                                    <a asp-area="" asp-controller="Vendas" asp-action="Index">Vendas</a>
+                                    <ul class="dropdown">
+                                        <li><a asp-area="" asp-controller="Vendas" asp-action="Relatorios">Relatório de Veículo</a></li>
+                                        <li><a asp-area="" asp-controller="Vendas" asp-action="RelatorioVendedor">Relatório de Vendedor</a></li>
+                                    </ul>
+                                </li>
                                 <li><a asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
                                 <li><a asp-area="" asp-controller="Vendedores" asp-action="Index">Vendedores</a></li>
                                 <li><a asp-area="" asp-area="" asp-controller="Administradors" asp-action="Index">Administradores</a></li>
